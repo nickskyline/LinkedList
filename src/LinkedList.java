@@ -77,30 +77,80 @@ public class LinkedList {
             return busqueda;
         }
     }
-    public void eliminarPorPoscion (int posicion) {
+    public void eliminarPorPosicion(int posicion) {
+        Node actual = null;
         if (posicion < 0) {
             throw new IndexOutOfBoundsException();
-        } else {
-            Node actual = head;
-            for (int i = 0; i < posicion; i++) {
-                if (actual == null) {
-                    throw new IndexOutOfBoundsException();
-                }
-                while (actual != null) {
-                    actual = actual.next;
+        } else if (posicion == 0) {
+            // Si quitamos el head, entonces el movemos el head al siguiente nodo
+            if (head != null) {
+                head = head.next;
+                if (head == null) { //si la lista tenia un solo elemento, que era el head
+                    tail = null;  // actualiza el tail haciendolo nulo tmb
                 }
             }
+        } else {
+            actual = head;
+            for (int i = 0; i < posicion - 1; i++)
+                if (actual == null || actual.next == null) {
+                    throw new IndexOutOfBoundsException();
+                }
+            actual = actual.next;
+
+            if (actual.next != null) {
+                actual.next = actual.next.next;
+                if (actual.next == null) {
+                    tail = actual; //actualizamos la cola si es la que removemos
+                }
+            } else {
+                throw new IndexOutOfBoundsException();
+            }
         }
+
     }
-    public void buscarPorValor(int valor) {
+    public void buscarPorValor(int posicion) {
         Node temp = head;
-        //[5] -> [6] -> [9] -> [3] -> [2]
         while (temp != null) {
-            if (temp.value == valor) {
+            if (temp.value == posicion) {
                 System.out.print(temp.value + " ");
             }
             temp = temp.next;
         }
         System.out.println();
+    }
+    public void remplazar(int posicion, int valor) {
+
+        if (posicion < 0) {
+            throw new IndexOutOfBoundsException();
+        } else {
+            Node actual = head;
+            for (int i = 0; i < posicion - 1; i++) {
+                if (actual == null) {
+                    throw new IndexOutOfBoundsException();
+                }
+                actual = actual.next.next;
+            }
+           actual.value = valor;
+        }
+    }
+    public void eliminarHead() {
+        if (head == null) { //si la lista tenia un solo elemento, que era el head
+            tail = null;  // actualiza el tail haciendolo nulo tmb
+        } else {
+            head = head.next;
+        }
+    }
+    public void eliminarTail() {
+
+        if (tail == null) {
+            head = null;
+        } else {
+            Node actual = head;
+            while (actual.next != tail) {
+                actual = actual.next;
+            }
+            actual.next = null;
+            tail = actual;
+        }
     }
 }

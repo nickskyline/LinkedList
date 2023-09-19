@@ -16,5 +16,12 @@ public class Main {
         linkedList.imprimir();
         linkedList.eliminarPorPosicion(2);
         linkedList.imprimir();
+        linkedList.remplazar(2, 55);
+        linkedList.imprimir();
+        linkedList.eliminarPorPosicion(2);
+        linkedList.imprimir();
+        linkedList.eliminarHead();
+        linkedList.eliminarTail();
+        linkedList.imprimir();
     }
 }
