@@ -77,39 +77,21 @@ public class LinkedList {
             return busqueda;
         }
     }
-
-    public void eliminarPorPosicion(int posicion) {
+    public void eliminarPorPoscion (int posicion) {
         if (posicion < 0) {
             throw new IndexOutOfBoundsException();
-        } else if (posicion == 0) {
-            // Si quitamos el head, entonces el movemos el head al siguiente nodo
-            if (head != null) {
-                head = head.next;
-                if (head == null) { //si la lista tenia un solo elemento, que era el head
-                    tail = null;  // actualiza el tail haciendolo nulo tmb
-                }
-            }
-
         } else {
             Node actual = head;
-            for (int i = 0; i < posicion-1; i++) {
-                if (actual == null || actual.next == null) {
+            for (int i = 0; i < posicion; i++) {
+                if (actual == null) {
                     throw new IndexOutOfBoundsException();
                 }
-                actual = actual.next;
-            }
-
-            if (actual.next != null) {
-                actual.next = actual.next.next;
-                if (actual.next == null) {
-                    tail = actual; //actualizamos la cola si es la que removemos
+                while (actual != null) {
+                    actual = actual.next;
                 }
-            } else {
-                throw new IndexOutOfBoundsException();
             }
         }
     }
-
     public void buscarPorValor(int valor) {
         Node temp = head;
         //[5] -> [6] -> [9] -> [3] -> [2]
@@ -120,9 +102,5 @@ public class LinkedList {
             temp = temp.next;
         }
         System.out.println();
-    }
-
-    public void getTail() {
-        System.out.println(tail.value);
     }
 }

@@ -14,10 +14,7 @@ public class Main {
         linkedList.agregarPorPosicion(2, 22);
         linkedList.agregarPorPosicion(7,20);
         linkedList.imprimir();
-        linkedList.buscarPorPosicion(1);
-        linkedList.eliminarPorPoscion(1);
-        linkedList.buscarPorPosicion(1);
+        linkedList.eliminarPorPosicion(2);
         linkedList.imprimir();
-        linkedList.buscarPorValor(10);
     }
 }
